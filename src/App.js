@@ -1,12 +1,11 @@
 import './App.css';
-import { FormTodo } from "./components/FormTodo";
+import { ListTodo } from './components/ListTodo';
 
 function App() {
   return (
     <div className="App">
-      <FormTodo />
+      <ListTodo />
     </div>
   );
 }
-
 export default App;

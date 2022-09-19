@@ -1,28 +1,36 @@
 import { useState } from "react";
 
-export const FormTodo = () => {
-    const [todo, setTodo] = useState("");
-    const [todos, setTodos] = useState([]);
-    
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        setTodos([...todos, todo]);
-        setTodo("");
-    };
-    
-    return (
-        <form onSubmit={handleSubmit}>
-        <input
-            type="text"
-            value={todo}
-            onChange={(e) => setTodo(e.target.value)}
-        />
-        <button type="submit">Ajouter</button>
-        <ul>
-            {todos.map((todo, index) => (
-            <li key={index}>{todo}</li>
-            ))}
-        </ul>
-        </form>
-    );
+export const FormTodo = (props) => {
+    const [input, setInput] = useState('');
+
+    const handleChange = e => {
+        setInput(e.target.value);
     }
+
+    const handleSubmit = e => {
+        e.preventDefault();
+
+        props.onSubmit({
+            id: Math.floor(Math.random() * 10000),
+            text: input
+        });
+
+        setInput('');
+    }
+
+    return (
+        <form className="todo-form" onSubmit={handleSubmit}>
+            <input
+                type="text"
+                placeholder="Ajouter une tâche"
+                value={input}
+                name="text"
+                className="todo-input"
+                onChange={handleChange}
+            />
+            <button className="todo-button">Ajouter</button>
+        </form>
+
+    );
+    
+}
